@@ -1,0 +1,10 @@
+google_api_python_client==2.149.0
+matplotlib==3.9.2
+nltk==3.9.1
+pandas==2.2.3
+Sastrawi==1.0.1
+scikit_learn==1.5.2
+streamlit==1.39.0
+tqdm==4.66.5
+transformers==4.45.2
+wordcloud==1.9.3
