@@ -82,7 +82,7 @@ This repository contains a <b>sentiment analysis</b> project that classifies You
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Answer each question to the end as the user feels and click the “Predict” button to make predictions based on the user's answers to the 12 questions.
+Open the website and type in the comments to get the sentiment analysis result. The result can be either positive, neutral, or negative.
 
 <p align="right">(<a href="#about-the-project">back to top</a>)</p>
 
