@@ -22,7 +22,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img align="center" src="./image/screenshot.png">
+<img align="center" src="./image/screenshot-2.png">
 
 This repository contains a <b>sentiment analysis</b> project that classifies YouTube comments as positive, neutral, or negative based on <a href="https://youtu.be/oG852gUrDG8?si=y5gq79dyg0ENr4sX">this video YouTube</a>. The dataset includes pre-processed text in the cleaned_stemmed column, and sentiment labels are generated using an automated approach based on natural language processing (NLP). The project also includes a machine learning model trained on these labeled data, saved for future use.
 
@@ -74,7 +74,7 @@ This repository contains a <b>sentiment analysis</b> project that classifies You
    ```
 2. Run app.py with streamlit library
    ```bash
-   streamlit run app.py
+   streamlit run Home.py
    ```
 
 <p align="right">(<a href="#about-the-project">back to top</a>)</p>
