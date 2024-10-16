@@ -3,6 +3,7 @@ import pickle
 import pandas as pd
 
 # Fungsi untuk memuat model dari file .pkl
+@st.cache_data
 def load_model(model_filename):
     with open(model_filename, 'rb') as file:
         model = pickle.load(file)
@@ -15,9 +16,7 @@ def predict_sentiment(model, input_text):
 
 # Fungsi untuk menampilkan aplikasi Streamlit
 def main():
-    st.title("Sentiment Analysis Based On Youtube Comments")
-    st.write("Keras! Rocky Singgung Penjilat, Silfester Emosi hingga Keluar Kata Kasar - Rakyat Bersuara 03/09")
-    st.write("Link: https://youtu.be/oG852gUrDG8?si=iBaeb2cYpCcCSvE8")
+    st.title("Sentiment Analysis Tool")
 
     # Muat kedua model dari file .pkl
     model1_filename = './model/naive-bayes-model.pkl'
