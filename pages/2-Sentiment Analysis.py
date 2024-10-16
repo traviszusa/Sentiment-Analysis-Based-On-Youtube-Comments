@@ -1,7 +1,5 @@
 import streamlit as st
 import pickle
-import matplotlib.pyplot as plt
-from wordcloud import WordCloud
 import pandas as pd
 
 # Fungsi untuk memuat model dari file .pkl
@@ -27,7 +25,7 @@ def main():
     model1 = load_model(model1_filename)
     model2 = load_model(model2_filename)
     
-    st.success("Model 1 dan Model 2 berhasil dimuat!")
+    st.success("Model Unbalanced dan Model Balanced berhasil dimuat!")
     
     # Input teks untuk analisis sentimen
     input_text = st.text_input("Masukkan teks untuk dianalisis:")
@@ -39,14 +37,6 @@ def main():
         sentiment_model2 = predict_sentiment(model2, input_text)
         st.info(f"Prediksi Model Naive Bayes Balanced: {sentiment_model2}")
 
-    # Visualisasi wordcloud dari csv file
-    csv_file = './data/youtube-comment-sentiment-cleaned.csv'
-    df = pd.read_csv(csv_file)
-    wordcloud = WordCloud(width=800, height=400).generate_from_text(' '.join(df['cleaned_stemmed']))
-    plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis('off')
-    plt.show()
-    st.pyplot(plt)
-
+# Memulai aplikasi
 if __name__ == '__main__':
     main()
