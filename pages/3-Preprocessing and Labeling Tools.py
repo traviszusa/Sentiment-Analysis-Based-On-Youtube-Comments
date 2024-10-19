@@ -14,6 +14,7 @@ from wordcloud import WordCloud
 
 # Download necessary NLTK resources
 nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 
 # Check if CUDA is available and set device
