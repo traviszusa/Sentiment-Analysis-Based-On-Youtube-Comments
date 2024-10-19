@@ -2,40 +2,37 @@ import streamlit as st
 import pickle
 import pandas as pd
 
-# Fungsi untuk memuat model dari file .pkl
+# Function to load the model
 @st.cache_data
 def load_model(model_filename):
     with open(model_filename, 'rb') as file:
         model = pickle.load(file)
     return model
 
-# Fungsi untuk prediksi sentimen dari input pengguna
+# Function to predict sentiment
 def predict_sentiment(model, input_text):
     prediction = model.predict([input_text])
     return prediction[0]
 
-# Fungsi untuk menampilkan aplikasi Streamlit
+# Main function
 def main():
-    st.title("Sentiment Analysis Tool")
+    st.title("Sentiment Analysis Tools")
 
-    # Muat kedua model dari file .pkl
     model1_filename = './model/naive-bayes-model.pkl'
     model2_filename = './model/naive-bayes-model-balanced.pkl'
     model1 = load_model(model1_filename)
     model2 = load_model(model2_filename)
     
-    st.success("Model Unbalanced dan Model Balanced berhasil dimuat!")
+    st.success("Unbalanced and Balanced Models successfully loaded!")
     
-    # Input teks untuk analisis sentimen
-    input_text = st.text_input("Masukkan teks untuk dianalisis:")
+    input_text = st.text_input("Enter text to analyze:")
     
     if input_text:
         sentiment_model1 = predict_sentiment(model1, input_text)
-        st.info(f"Prediksi Model Naive Bayes Unbalanced: {sentiment_model1}")
+        st.info(f"Prediction of Unbalanced Naive Bayes Model: {sentiment_model1}")
         
         sentiment_model2 = predict_sentiment(model2, input_text)
-        st.info(f"Prediksi Model Naive Bayes Balanced: {sentiment_model2}")
+        st.info(f"Prediction of Balanced Naive Bayes Model: {sentiment_model2}")
 
-# Memulai aplikasi
 if __name__ == '__main__':
     main()
