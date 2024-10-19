@@ -6,6 +6,7 @@ python-dotenv==1.0.1
 Sastrawi==1.0.1
 scikit_learn==1.5.2
 streamlit==1.39.0
+torch==2.4.1
 tqdm==4.66.5
 transformers==4.45.2
 wordcloud==1.9.3
