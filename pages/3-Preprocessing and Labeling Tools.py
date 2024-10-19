@@ -1,10 +1,11 @@
 import streamlit as st
 import pandas as pd
 import nltk
+import torch
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from tqdm import tqdm
-from transformers import pipeline
+from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
 import re
 import ast
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
@@ -15,12 +16,12 @@ from wordcloud import WordCloud
 nltk.download('punkt')
 nltk.download('stopwords')
 
-# Pre-trained sentiment analysis model
-distilled_student_sentiment_classifier = pipeline(
-    model="lxyuan/distilbert-base-multilingual-cased-sentiments-student",
-    return_all_scores=True,
-    truncation=True
-)
+# Check if CUDA is available and set device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Load the pre-trained model and tokenizer for sentiment analysis
+model = AutoModelForSequenceClassification.from_pretrained("lxyuan/distilbert-base-multilingual-cased-sentiments-student").to(device)
+tokenizer = AutoTokenizer.from_pretrained("lxyuan/distilbert-base-multilingual-cased-sentiments-student")
 
 # Function to clean text
 def clean_comment(comment, replace_word):
@@ -82,10 +83,14 @@ def clean_and_convert(text):
     else:
         return ''
 
-# Function to perform sentiment analysis
+# Function to perform sentiment analysis using CUDA
 def sentiment_analysis(text):
-    result = distilled_student_sentiment_classifier(text)
-    highest_score_label = max(result[0], key=lambda x: x['score'])['label']
+    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True).to(device)
+    with torch.no_grad():
+        outputs = model(**inputs)
+    probabilities = torch.softmax(outputs.logits, dim=-1).cpu().numpy()[0]
+    labels = ["negative", "neutral", "positive"]
+    highest_score_label = labels[probabilities.argmax()]
     return highest_score_label
 
 if 'additional_stopwords' not in st.session_state:
